@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grace 💖 My Forever</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff758f, #ffb3c1);
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* 🔐 LOCK SCREEN */
+    .lock {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #ff758f, #ffb3c1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .lock-box {
+        background: white;
+        padding: 30px;
+        border-radius: 25px;
+        text-align: center;
+        width: 90%;
+        max-width: 350px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        animation: zoomIn 1s ease;
+    }
+
+    .lock-box input {
+        padding: 12px;
+        width: 100%;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        margin: 15px 0;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .lock-box button {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        background: #ff4d6d;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .lock-box p {
+        color: #555;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.9rem;
+        display: none;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+        background: white;
+        width: 95%;
+        max-width: 450px;
+        padding: 25px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        animation: zoomIn 1.2s ease;
+        position: relative;
+        z-index: 10;
+    }
+
+    h1 {
+        color: #d6336c;
+        margin-bottom: 10px;
+    }
+
+    /* Slideshow */
+    .slideshow {
+        width: 100%;
+        height: 220px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    .slideshow img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        animation: fade 1s ease;
+    }
+
+    @keyframes fade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Typing */
+    .typing {
+        font-size: 1rem;
+        color: #444;
+        min-height: 90px;
+        margin-bottom: 15px;
+    }
+
+    /* Buttons */
+    button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s ease;
+    }
+
+    .yes {
+        background: #ff4d6d;
+        color: white;
+    }
+
+    .yes:hover {
+        transform: scale(1.1);
+        background: #ff1e56;
+    }
+
+    .no {
+        background: #ccc;
+    }
+
+    /* Hidden Message */
+    .secret {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #fff0f3;
+        border-radius: 15px;
+        animation: fadeUp 1s ease forwards;
+    }
+
+    .secret h3 {
+        color: #ff4d6d;
+    }
+
+    /* Hearts */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        font-size: 20px;
+        color: white;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); opacity: 0; }
+        20% { opacity: 1; }
+        100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.85); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        color: #777;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 PASSWORD SCREEN -->
+<div class="lock" id="lock">
+    <div class="lock-box">
+        <h2>🔐 For Grace Only</h2>
+        <p>Enter our secret 💕</p>
+        <input type="password" id="password" placeholder="Our secret">
+        <button onclick="unlock()">Unlock ❤️</button>
+        <div class="error" id="error">Wrong password 💔</div>
+    </div>
+</div>
+
+<!-- 🎶 Background Music -->
+<audio id="music" loop>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <h1>Grace 💖</h1>
+
+    <!-- 📸 Slideshow -->
+    <div class="slideshow">
+        <img id="slide" src="image/me.jpeg" alt="Memories">
+    </div>
+
+    <!-- 💬 Typing Effect -->
+    <div class="typing" id="typing"></div>
+
+    <h2>Will you be my valentine ?</h2>
+
+    <button class="yes" onclick="sayYes()">YES 💖</button>
+    <button class="no" onmouseover="runAway(this)">NO 🙈</button>
+
+    <!-- 🔐 Hidden Message -->
+    <div class="secret" id="secret">
+        <h3>My Promise to You 🌹</h3>
+        <p>
+            I promise to love you on easy days and hard days,  
+            to choose you every single morning,  
+            and to walk forever by your side.
+        </p>
+    </div>
+
+    <footer>
+        Happy Valentine 💕
+    </footer>
+</div>
+
+<script>
+    /* 🔐 PASSWORD */
+    function unlock() {
+        const pass = document.getElementById("password").value;
+        if (pass === "forever") { // 🔑 CHANGE PASSWORD HERE
+            document.getElementById("lock").style.display = "none";
+            document.getElementById("music").play();
+            typeText();
+        } else {
+            document.getElementById("error").style.display = "block";
+        }
+    }
+
+    /* Typing Effect */
+    const text = "Grace, loving you has been the easiest and most beautiful decision of my life. You are my safe place, my joy, my forever.";
+    let index = 0;
+    const speed = 50;
+    function typeText() {
+        if (index < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeText, speed);
+        }
+    }
+
+    /* Slideshow */
+    const images = ["image/me.jpeg"];
+    let current = 0;
+    setInterval(() => {
+        current = (current + 1) % images.length;
+        document.getElementById("slide").src = images[current];
+    }, 3000);
+
+    /* Proposal YES */
+    function sayYes() {
+        document.getElementById("secret").style.display = "block";
+        launchHearts();
+    }
+
+    /* No Button Run */
+    function runAway(btn) {
+        btn.style.transform =
+            `translate(${Math.random()*150-75}px, ${Math.random()*150-75}px)`;
+    }
+
+    /* Hearts */
+    function launchHearts() {
+        for (let i = 0; i < 40; i++) {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration =
+                (Math.random() * 3 + 3) + "s";
+            heart.style.fontSize =
+                (Math.random() * 15 + 15) + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+    }
+</script>
+
+</body>
+</html>
